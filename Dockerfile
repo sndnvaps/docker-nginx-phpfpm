@@ -86,7 +86,7 @@ RUN ln -s /usr/share/java/ant-contrib.jar /usr/share/ant/lib/
 
 # Install Supervisor
 RUN apt-get install -y supervisor
-ADD supervisord.conf /etc/supervisor/supervisord.conf
+ADD nginx-fpm.conf /etc/supervisor/conf.d/nginx-fpm.conf
 
 WORKDIR /
 
