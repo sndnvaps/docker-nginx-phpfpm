@@ -1,4 +1,4 @@
-#PHP-FPM with Nginx
+# PHP-FPM with Nginx
 
 ### Installed packages
 
