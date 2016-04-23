@@ -73,23 +73,18 @@ RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/bi
 # Install MySQL-Client
 RUN apt-get install --no-install-recommends -y mysql-client
 
-# Install Java JDK 7
-RUN apt-get install --no-install-recommends -y openjdk-7-jdk
-
-# Set Java version
-RUN update-alternatives --set java /usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java
-
-# Install ANT
-RUN apt-get install --no-install-recommends -y ant ant-contrib
-
-RUN ln -s /usr/share/java/ant-contrib.jar /usr/share/ant/lib/
 
 # Install Supervisor
 RUN apt-get install -y supervisor
 ADD nginx-fpm.conf /etc/supervisor/conf.d/nginx-fpm.conf
 
+# clean 
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+RUN mkdir -p /www
+
 WORKDIR /
 
-EXPOSE 80
+EXPOSE 80 443
 
 CMD ["/usr/bin/supervisord"]
